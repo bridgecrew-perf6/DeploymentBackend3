@@ -1,0 +1,25 @@
+Java Port:
+
+
+  static int getHerokuAssignedPort() {
+    ProcessBuilder processBuilder = new ProcessBuilder();
+    if (processBuilder.environment().get("PORT") != null) {
+      return Integer.parseInt(processBuilder.environment().get("PORT"));
+    }
+    return DEFAULT_PORT;
+  }
+
+
+Procfile
+
+web: java $JAVA_OPTS -cp target/classes:target/dependency/* <<<package.Main>>>
+
+
+pom.xml dependency
+
+            <!-- https://mvnrepository.com/artifact/com.heroku.sdk/heroku-deploy -->
+        <dependency>
+            <groupId>com.heroku.sdk</groupId>
+            <artifactId>heroku-deploy</artifactId>
+            <version>3.0.4</version>
+        </dependency>
